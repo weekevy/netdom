@@ -16,8 +16,6 @@ function banner() {
     echo "  netdom v0.1"
     echo "  weekeyv/github"
 }
-
-
 function show_help() {
     banner
     echo "  Usage: netdom [MODULE]"
@@ -35,6 +33,46 @@ function show_help() {
     echo "" 
 }
 echo ""
+
+
+
+main() {
+    if [[ -f "$MODULE_PATH" ]]; then
+        # Pass ALL remaining arguments after shift
+        bash "$MODULE_PATH" "$@"
+    else
+        banner
+        echo ""
+        echo "Error: Module '$MODULE' does not exist."
+        echo ""
+        echo "Available modules:"
+        echo "  passive"
+        echo "  active"
+        echo "  level"
+        exit 1
+    fi
+}
+
+
+
+
+function main() {
+    if [[ -f "$MODULE_PATH" ]]; then
+        # Pass ALL remaining arguments after shift
+        bash "$MODULE_PATH" "$@"
+    else
+        banner
+        echo ""
+        echo "Error: Module '$MODULE' does not exist."
+        echo ""
+        echo "Available modules:"
+        echo "  passive"
+        echo "  active"
+        echo "  level"
+        exit 1
+    fi
+}
+
 
 function show_module_error() {
     banner
@@ -80,5 +118,8 @@ function main() {
         exit 1
     fi
 }
+
+
+
 
 main "$@"
